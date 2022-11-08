@@ -1,0 +1,25 @@
+{% extends 'base.html' %}{% block content%}
+
+<h1>Art Details</h1>
+<a href="{% url 'global_index' %}">Back to Global Collection</a>
+<div class="card">
+  <div class="card=content">
+    <span class="card-title">Artist: {{ art.user }}</span>
+    <br />
+    <h3>{{ art.name }}</h3>
+    <div class="photo-box">
+      {% for photo in art.photoart_set.all %}
+      <img class="responsive-img card-panel" src="{{photo.url}}" height="300"/>
+      {% empty %}
+      <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+      {% endfor %}
+    </div>
+
+    <p>Date: {{ art.date }}</p>
+    <p>Mediums Used: {{ art.mediums }}</p>
+    <p>Description: {{ art.description }}</p>
+  </div>
+  </div>
+</div>
+
+{% endblock%}

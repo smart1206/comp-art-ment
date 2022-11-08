@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>compARTment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+
+<body>
+    <header class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper black">
+                <a href="#" data-target="mobile-demo" class="right sidenav-trigger">
+                    <i class="material-icons">menu</i>
+                </a>
+                <a href="{% url 'profile' %}" class="right"><i class="material-icons">account_circle</i></a>
+                <ul>
+                    <li>
+                        <a href="/" class="left brand-logo" style="color: #d9d9d9">
+                            <img src="{% static 'images/Art-Design.png'%}" alt="logo"
+                                height="55" />&nbsp;&nbsp;comp<span style="color: #ff5757">A</span><span
+                                style="color: #f7ba2f">R</span><span style="color: #5ce1e6">T</span>ment</a>
+                    </li>
+                </ul>
+                <ul class="right hide-on-med-and-down">
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'global_index' %}">Global Collection</a></li>
+                    <li><a href="{% url 'index' %}">Art Gallery</a></li>
+                    <li><a href="{% url 'art_create' %}">Add Art</a></li>
+                    <li><a href="{% url 'logout' %}">Log out</a></li>
+                    {% else %}
+                    <li><a href="{% url 'global_index' %}">Global Collection</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                    <!-- Make side nav later -->
+                    <!-- <li><a href="{% url 'art_create' %}">Add Art</a></li> -->
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Mobile menu -->
+        <ul class="sidenav" id="mobile-demo">
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'global_index' %}">Global Collection</a></li>
+            <li><a href="{% url 'index' %}">Art Gallery</a></li>
+            <li><a href="{% url 'art_create' %}">Add Art</a></li>
+            <li><a href="{% url 'profile' %}">Account</a></li>
+            <li>
+                <a href="{% url 'logout' %}">
+                    Log out
+                    <ion-icon size="small" name="log-out-outline"></ion-icon>
+                </a>
+            </li>
+            {% else %}
+            <li><a href="{% url 'global_index' %}">Global Collection</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </header>
+    <main class="container">{% block content %} {% endblock %}</main>
+    <footer class="page-footer black">
+        <div class="center">
+            <a href="https://github.com/jzolly">
+                <ion-icon size="large" name="logo-github"></ion-icon>
+            </a>
+            <a href="https://www.linkedin.com/feed/">
+                <ion-icon size="large" name="logo-linkedin"></ion-icon>
+            </a>
+        </div>
+        <div class="right">All Rights Reserved, © 2022 compARTment</div>
+    </footer>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var elems = document.querySelectorAll(".sidenav");
+            var instances = M.Sidenav.init(elems);
+        });
+    </script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

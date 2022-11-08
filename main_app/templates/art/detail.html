@@ -1,0 +1,42 @@
+{% extends 'base.html' %}{% block content%}
+
+<h1>Art Details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ art.name}}</span>
+    <br />
+    <div class="photo-box">
+      {% for photo in art.photoart_set.all %}
+      <img class="responsive-img card-panel" src="{{photo.url}}" height="300"/>
+      {% empty %}
+      <div class="card-panel red-text text-darken-1 center-align">No Photos Uploaded</div>
+      {% endfor %}
+    </div>
+
+    <p>Date: {{ art.date }}</p>
+    <p>Mediums Used: {{ art.mediums }}</p>
+    <p>Description: {{ art.description }}</p>
+  </div>
+  <div class="card-action">
+    <a href="{% url 'art_update' art.id %}"
+      ><span class="lime-text text-darken-1">Edit</span></a
+    >
+    <a href="{% url 'art_delete' art.id %}"
+      ><span class="lime-text text-darken-1">Delete</span></a
+    >
+  </div>
+  <form
+    action="{% url 'add_art_photo' art.id %}"
+    enctype="multipart/form-data"
+    method="POST"
+    class="card-panel"
+  >
+    {% csrf_token %}
+    <input type="file" name="art_photo_file" />
+    <br /><br />
+    <input type="submit" class="btn cyan accent-4" value="Upload Photo" />
+  </form>
+</div>
+
+{% endblock%}

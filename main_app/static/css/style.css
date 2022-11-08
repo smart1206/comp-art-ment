@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    
+}
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #d9d9d9;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    padding-top: 0;
+    text-align: right;
+}
+
+ion-icon {
+    color:#d9d9d9;
+}
+.home-display {
+    width: 80vw;
+
+}
+.home-img {
+    width: 100%;
+}
+
+.index-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    flex: 0 1 calc(50% - 8px);
+}
+
+.card:not(:last-of-type) {
+    margin-right: 8px;
+}
+
+.art-img {
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.profile-pic {
+    border-radius: 50%;
+}
+
+.sidenav-overlay {
+    z-index: 996;
+}
+
+@media only screen and (max-width: 600px) {
+    .card {
+        flex: 1 1 auto;
+    }
+}

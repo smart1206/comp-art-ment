@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+    {% if not profile.count %}
+    <h1>Artists Profile Page</h1>
+    <div class="btn cyan accent-4">
+        <a href="{% url 'profile_create' %}"><span class="white-text">Create Profile</span></a> 
+    </div>
+    {% endif %}<br/>
+    <hr />
+    {% for profile in profile %}
+    <h1>{{ profile.artist_name}}'s Page</h1>
+    <div>
+        <div class="btn cyan accent-4">
+            <a href="{% url 'profile_update' profile.id %}"><span class="white-text">Manage Profile</span></a> 
+        </div><br/>
+        <hr/>
+        {% for photo in profile.photoprofile_set.all %}
+            <img class="profile-pic" src="{{ photo.url }}" alt="{{ profile.artist_name }}" height="450">
+        {% empty %}
+            <div>No Photo</div>
+        {% endfor %}  
+        
+        <p><strong>Artist Name:</strong> {{ profile.artist_name}}</p>
+        <p><strong>Artist Statement:</strong> {{ profile.statement }}</p>
+        <p><strong>About:</strong> {{ profile.about }}</p> 
+    </div>
+    <form
+    action="{% url 'add_profile_photo' profile.id %}"
+    class="card-panel"
+    method="POST"
+    enctype="multipart/form-data"
+    >
+        {% csrf_token %}
+        <input type="file" name="photo-file" />
+        <br /><br />
+        <input type="submit" class="btn cyan accent-4"" value="Upload Photo" />
+    </form>
+    {%  endfor %}
+</div>
+
+
+<!-- if time -->
+<!-- <p>Mediums</p>
+<p>Art Inspirations</p> -->
+
+{% endblock %}

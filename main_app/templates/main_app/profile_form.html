@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+{% if object %}
+<h1>Edit Profile <span class="teal-text">{{object.name}}</span></h1>
+{% else %}
+<h1>Create Profile</h1>
+{% endif %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        
+    </table>
+    <input type="submit" value="{% if object %} Update Profile {% else %} Create Profile {% endif %}" class="btn cyan accent-4"" />
+</form>
+{% endblock %}

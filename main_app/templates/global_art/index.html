@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Global Collection</h1>
+<div class="index-container">
+    {% for art in art %}
+    <div class="card">
+        <a href="{% url 'global_detail' art.id %}">
+            <div class="card-content">
+                <span class="card-title">{{ art.name }}</span>
+                {% for photo in art.photoart_set.all %}
+                <img  class="art-img" class="z-depth-3" src="{{ photo.url }}" alt="{{ art.name }}" />
+                {% endfor %}
+                <p>Artist: {{art.user}}</p>
+                <p>Date: {{ art.date }}</p>
+            </div>
+        </a>
+    </div>
+    {% endfor %} 
+</div>
+{% endblock %}
